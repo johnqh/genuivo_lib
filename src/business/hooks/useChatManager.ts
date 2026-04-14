@@ -1,9 +1,9 @@
-import { useState, useRef, useCallback } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import type {
+  ChatResponse,
   IRenderable,
   NetworkClient,
   Optional,
-  ChatResponse,
 } from '@sudobility/genuivo_types';
 import type { FirebaseIdToken } from '@sudobility/genuivo_client';
 import { useChat } from '@sudobility/genuivo_client';
@@ -25,9 +25,7 @@ const INPUT_LAYOUTS = new Set([
 export function hasInputControls(renderable: IRenderable): boolean {
   const layout = renderable.view?.layout;
   if (layout && INPUT_LAYOUTS.has(layout)) return true;
-  return (
-    renderable.view?.children?.some(hasInputControls) ?? false
-  );
+  return renderable.view?.children?.some(hasInputControls) ?? false;
 }
 
 const INITIAL_RENDERABLE: IRenderable = {
@@ -58,9 +56,7 @@ function buildRequest(
   isFirst: boolean
 ): string {
   if (isFirst) {
-    return (
-      inputValues['user-query'] ?? Object.values(inputValues)[0] ?? ''
-    );
+    return inputValues['user-query'] ?? Object.values(inputValues)[0] ?? '';
   }
   const answers = Object.entries(inputValues)
     .filter(([, v]) => v.trim() !== '')
@@ -89,12 +85,11 @@ export function useChatManager(
   config: UseChatManagerConfig
 ): UseChatManagerReturn {
   const { networkClient, baseUrl, userId, token } = config;
-  const { chat, isLoading: isChatLoading, error: chatError } = useChat(
-    networkClient,
-    baseUrl,
-    userId,
-    token
-  );
+  const {
+    chat,
+    isLoading: isChatLoading,
+    error: chatError,
+  } = useChat(networkClient, baseUrl, userId, token);
 
   const [currentRenderable, setCurrentRenderable] =
     useState<IRenderable>(INITIAL_RENDERABLE);
@@ -105,14 +100,11 @@ export function useChatManager(
   const inputValues = useRef<Record<string, string>>({});
   const inputLabels = useRef<Record<string, string>>({});
 
-  const handleAction = useCallback(
-    (value: string, renderable: IRenderable) => {
-      inputValues.current[renderable.id] = value;
-      inputLabels.current[renderable.id] =
-        renderable.view?.title?.text ?? renderable.id;
-    },
-    []
-  );
+  const handleAction = useCallback((value: string, renderable: IRenderable) => {
+    inputValues.current[renderable.id] = value;
+    inputLabels.current[renderable.id] =
+      renderable.view?.title?.text ?? renderable.id;
+  }, []);
 
   const handleSubmit = useCallback(async () => {
     const request = buildRequest(
