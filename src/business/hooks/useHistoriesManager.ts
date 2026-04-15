@@ -3,7 +3,6 @@ import type {
   History,
   HistoryCreateRequest,
   HistoryUpdateRequest,
-  NetworkClient,
   Optional,
 } from '@sudobility/genuivo_types';
 import type { FirebaseIdToken } from '@sudobility/genuivo_client';
@@ -26,15 +25,6 @@ import { calculatePercentage } from '../utils/calculations';
  * ```
  */
 export interface UseHistoriesManagerConfig {
-  /** The base URL of the Starter API server. */
-  baseUrl: string;
-
-  /**
-   * A {@link NetworkClient} implementation for HTTP requests.
-   * Injected to allow different fetch implementations per platform (web vs React Native).
-   */
-  networkClient: NetworkClient;
-
   /**
    * The Firebase UID of the authenticated user, or `null`/`undefined` when not logged in.
    * Cache is isolated per user -- switching users shows a fresh state.
@@ -210,8 +200,6 @@ export interface UseHistoriesManagerReturn {
  * ```
  */
 export const useHistoriesManager = ({
-  baseUrl,
-  networkClient,
   userId,
   token,
   autoFetch = true,
@@ -227,13 +215,13 @@ export const useHistoriesManager = ({
     isCreating,
     isUpdating,
     isDeleting,
-  } = useHistories(networkClient, baseUrl, userId ?? null, token ?? null);
+  } = useHistories(userId ?? null, token ?? null);
 
   const {
     total,
     isLoading: totalLoading,
     error: totalError,
-  } = useHistoriesTotal(networkClient, baseUrl);
+  } = useHistoriesTotal();
 
   const cacheEntry = useHistoriesStore(
     useCallback(state => (userId ? state.cache[userId] : undefined), [userId])

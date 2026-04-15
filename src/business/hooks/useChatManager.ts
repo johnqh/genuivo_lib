@@ -2,7 +2,6 @@ import { useCallback, useRef, useState } from 'react';
 import type {
   ChatResponse,
   IRenderable,
-  NetworkClient,
   Optional,
 } from '@sudobility/genuivo_types';
 import type { FirebaseIdToken } from '@sudobility/genuivo_client';
@@ -66,8 +65,6 @@ function buildRequest(
 }
 
 export interface UseChatManagerConfig {
-  baseUrl: string;
-  networkClient: NetworkClient;
   userId: Optional<string>;
   token: Optional<FirebaseIdToken>;
 }
@@ -84,12 +81,12 @@ export interface UseChatManagerReturn {
 export function useChatManager(
   config: UseChatManagerConfig
 ): UseChatManagerReturn {
-  const { networkClient, baseUrl, userId, token } = config;
+  const { userId, token } = config;
   const {
     chat,
     isLoading: isChatLoading,
     error: chatError,
-  } = useChat(networkClient, baseUrl, userId, token);
+  } = useChat(userId, token);
 
   const [currentRenderable, setCurrentRenderable] =
     useState<IRenderable>(INITIAL_RENDERABLE);
