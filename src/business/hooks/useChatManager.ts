@@ -48,19 +48,22 @@ const INITIAL_RENDERABLE: IRenderable = {
   },
 };
 
+function formatAnswers(
+  values: Record<string, string>,
+  labels: Record<string, string>
+): string {
+  return Object.entries(values)
+    .filter(([, v]) => v.trim() !== '')
+    .map(([id, value]) => `${labels[id] ?? id}: ${value}`)
+    .join(', ');
+}
+
 function buildRequest(
   originalQuery: string,
-  inputValues: Record<string, string>,
-  inputLabels: Record<string, string>,
-  isFirst: boolean
+  allAnswers: Record<string, string>,
+  allLabels: Record<string, string>
 ): string {
-  if (isFirst) {
-    return inputValues['user-query'] ?? Object.values(inputValues)[0] ?? '';
-  }
-  const answers = Object.entries(inputValues)
-    .filter(([, v]) => v.trim() !== '')
-    .map(([id, value]) => `${inputLabels[id] ?? id}: ${value}`)
-    .join(', ');
+  const answers = formatAnswers(allAnswers, allLabels);
   return answers ? `${originalQuery}. ${answers}` : originalQuery;
 }
 
@@ -92,10 +95,12 @@ export function useChatManager(
     useState<IRenderable>(INITIAL_RENDERABLE);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [originalQuery, setOriginalQuery] = useState('');
   const isFirstSubmission = useRef(true);
+  const originalQueryRef = useRef('');
   const inputValues = useRef<Record<string, string>>({});
   const inputLabels = useRef<Record<string, string>>({});
+  const allAnswers = useRef<Record<string, string>>({});
+  const allLabels = useRef<Record<string, string>>({});
 
   const handleAction = useCallback((value: string, renderable: IRenderable) => {
     inputValues.current[renderable.id] = value;
@@ -104,24 +109,34 @@ export function useChatManager(
   }, []);
 
   const handleSubmit = useCallback(async () => {
+    if (isFirstSubmission.current) {
+      const query =
+        inputValues.current['user-query'] ??
+        Object.values(inputValues.current)[0] ??
+        '';
+      if (!query.trim()) return;
+      originalQueryRef.current = query;
+      isFirstSubmission.current = false;
+      inputValues.current = {};
+      inputLabels.current = {};
+    } else {
+      // Merge current round answers into accumulated answers
+      Object.assign(allAnswers.current, inputValues.current);
+      Object.assign(allLabels.current, inputLabels.current);
+      inputValues.current = {};
+      inputLabels.current = {};
+    }
+
     const request = buildRequest(
-      originalQuery,
-      inputValues.current,
-      inputLabels.current,
-      isFirstSubmission.current
+      originalQueryRef.current,
+      allAnswers.current,
+      allLabels.current
     );
 
     if (!request.trim()) return;
 
-    if (isFirstSubmission.current) {
-      setOriginalQuery(request);
-      isFirstSubmission.current = false;
-    }
-
     setIsSubmitting(true);
     setSubmitError(null);
-    inputValues.current = {};
-    inputLabels.current = {};
 
     try {
       const response = await chat(request);
@@ -142,16 +157,18 @@ export function useChatManager(
     } finally {
       setIsSubmitting(false);
     }
-  }, [originalQuery, chat]);
+  }, [chat]);
 
   const restart = useCallback(() => {
     setCurrentRenderable(INITIAL_RENDERABLE);
-    setOriginalQuery('');
     setSubmitError(null);
     setIsSubmitting(false);
     isFirstSubmission.current = true;
+    originalQueryRef.current = '';
     inputValues.current = {};
     inputLabels.current = {};
+    allAnswers.current = {};
+    allLabels.current = {};
   }, []);
 
   const error: Optional<string> = submitError ?? chatError;
