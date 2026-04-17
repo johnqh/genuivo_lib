@@ -1,6 +1,6 @@
 {
   "name": "@sudobility/genuivo_lib",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "Business logic library for Starter with Zustand stores",
   "type": "module",
   "main": "dist/index.js",
@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.38.0",
-    "@sudobility/genuivo_client": "^0.0.24",
+    "@sudobility/genuivo_client": "^0.0.25",
     "@sudobility/genuivo_types": "^0.0.14",
     "@sudobility/types": "^1.9.61",
     "@tanstack/react-query": "^5.90.5",

@@ -6,7 +6,7 @@
       "name": "@sudobility/genuivo_lib",
       "devDependencies": {
         "@eslint/js": "^9.38.0",
-        "@sudobility/genuivo_client": "^0.0.24",
+        "@sudobility/genuivo_client": "^0.0.25",
         "@sudobility/genuivo_types": "^0.0.14",
         "@sudobility/types": "^1.9.61",
         "@tanstack/react-query": "^5.90.5",
@@ -144,7 +144,7 @@
 
     "@sudobility/genui_types": ["@sudobility/genui_types@0.0.1", "", {}, "sha512-upYoJVpy2y+cgIW2TwJtMuPhxzis42Dk5X6UtViTSh61GwnWofwK2atXsOrtDXPFj9vMrxJOVEOEu8UDR90p7g=="],
 
-    "@sudobility/genuivo_client": ["@sudobility/genuivo_client@0.0.24", "", { "peerDependencies": { "@sudobility/genui_types": "^0.0.1", "@sudobility/types": "^1.9.61", "@tanstack/react-query": ">=5.0.0", "react": ">=18.0.0" } }, "sha512-OGhHje+kNZfd2JeOKlCYf7AS+rXC1KhM9tBb7L/Dt2yCLpY0srkuNNNEsowR6VCnOFpbxsD7PlhBunRfTTf0HQ=="],
+    "@sudobility/genuivo_client": ["@sudobility/genuivo_client@0.0.25", "", { "peerDependencies": { "@sudobility/genui_types": "^0.0.1", "@sudobility/types": "^1.9.61", "@tanstack/react-query": ">=5.0.0", "react": ">=18.0.0" } }, "sha512-38wHBZRoythcH/euKpPENWtpVUSEZDUe9e+pEqzgHrkWmpXCkR4F/V8yMXbErXhrBmVSzuXDhUZksKgoCOuzqw=="],
 
     "@sudobility/genuivo_types": ["@sudobility/genuivo_types@0.0.14", "", { "peerDependencies": { "@sudobility/genui_types": "^0.0.1", "@sudobility/types": "^1.9.61" } }, "sha512-YKLHw7sqRGR33qPZUKrg7M9H0hmQACqT18FpfcxSG6zxJtjti2krbRNUduv9n3p70WcAaiDMKKkpmI/LnzB1fA=="],
 
