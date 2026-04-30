@@ -6,8 +6,8 @@
       "name": "@sudobility/genuivo_lib",
       "devDependencies": {
         "@eslint/js": "^9.38.0",
-        "@sudobility/genuivo_client": "^0.0.25",
-        "@sudobility/genuivo_types": "^0.0.14",
+        "@sudobility/genuivo_client": "^0.0.26",
+        "@sudobility/genuivo_types": "^0.0.15",
         "@sudobility/types": "^1.9.61",
         "@tanstack/react-query": "^5.90.5",
         "@testing-library/react": "^16.3.2",
@@ -29,7 +29,7 @@
         "zustand": "^5.0.8",
       },
       "peerDependencies": {
-        "@sudobility/genui_types": "^0.0.1",
+        "@sudobility/genui_types": "^0.0.2",
         "@sudobility/types": "^1.9.61",
         "@tanstack/react-query": ">=5.0.0",
         "react": ">=18.0.0",
@@ -144,9 +144,9 @@
 
     "@sudobility/genui_types": ["@sudobility/genui_types@0.0.1", "", {}, "sha512-upYoJVpy2y+cgIW2TwJtMuPhxzis42Dk5X6UtViTSh61GwnWofwK2atXsOrtDXPFj9vMrxJOVEOEu8UDR90p7g=="],
 
-    "@sudobility/genuivo_client": ["@sudobility/genuivo_client@0.0.25", "", { "peerDependencies": { "@sudobility/genui_types": "^0.0.1", "@sudobility/types": "^1.9.61", "@tanstack/react-query": ">=5.0.0", "react": ">=18.0.0" } }, "sha512-38wHBZRoythcH/euKpPENWtpVUSEZDUe9e+pEqzgHrkWmpXCkR4F/V8yMXbErXhrBmVSzuXDhUZksKgoCOuzqw=="],
+    "@sudobility/genuivo_client": ["@sudobility/genuivo_client@0.0.26", "", { "peerDependencies": { "@sudobility/genui_types": "^0.0.2", "@sudobility/types": "^1.9.61", "@tanstack/react-query": ">=5.0.0", "react": ">=18.0.0" } }, "sha512-ruwCQYft9qvZLNZRpx2hqoSwlTwFjdJnwBtd+sMSxpAHxo+mciVibLxBqC7MXZEU8JKwgU7C1hanXS6oCO7FUQ=="],
 
-    "@sudobility/genuivo_types": ["@sudobility/genuivo_types@0.0.14", "", { "peerDependencies": { "@sudobility/genui_types": "^0.0.1", "@sudobility/types": "^1.9.61" } }, "sha512-YKLHw7sqRGR33qPZUKrg7M9H0hmQACqT18FpfcxSG6zxJtjti2krbRNUduv9n3p70WcAaiDMKKkpmI/LnzB1fA=="],
+    "@sudobility/genuivo_types": ["@sudobility/genuivo_types@0.0.15", "", { "peerDependencies": { "@sudobility/genui_types": "^0.0.2", "@sudobility/types": "^1.9.61" } }, "sha512-5Coyupd7qmF0IhkPPnXo6cQT+zqECLD43KFaBMbjx+bRXGOsgfv2ocPmfr6PWdqJSU2iCMh4K6Semu943MmDhA=="],
 
     "@sudobility/types": ["@sudobility/types@1.9.61", "", {}, "sha512-SODGpstB/iKfK3H/4BvJx/FBcc1h3gutUjGotyxN19VnOfWyzaDoEmW7eyoxOAYhZyXMXagSiii+NIEZvuxKog=="],
 
