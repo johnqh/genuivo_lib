@@ -1,5 +1,10 @@
 # Genuivo Lib
 
+> **Git policy — never auto-commit or auto-push.** Leave your work in the working tree.
+> Run `git commit`, `git push`, `gh pr create`, or `scripts/push_all.sh` **only when the user
+> explicitly asks in that turn**. Approval for an earlier change does not carry forward, and
+> finishing a task is not permission to commit it.
+
 Business logic library with Zustand stores for the Genuivo application.
 
 **npm**: `@sudobility/genuivo_lib` (restricted, BUSL-1.1)
@@ -104,3 +109,7 @@ genuivo_app / genuivo_app_rn
 - Token change resets the entire store state -- this is intentional to prevent data leakage between users
 - `useRef` guards prevent duplicate fetches on mount; be careful not to break this guard when modifying the hook
 - This is a published npm package (`@sudobility/genuivo_lib`) -- coordinate breaking changes with genuivo_app and genuivo_app_rn
+
+## Git Workflow
+
+- Do not use feature branches for code changes. Always stay on the current branch.
