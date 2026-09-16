@@ -21,9 +21,9 @@
     "lint:fix": "bunx eslint src/ --fix",
     "format": "bunx prettier --write \"src/**/*.ts\"",
     "format:check": "bunx prettier --check \"src/**/*.ts\"",
-    "test": "vitest run",
+    "test:unit": "vitest run",
     "test:watch": "vitest",
-    "verify": "bun run typecheck && bun run lint && bun run test && bun run build"
+    "verify": "bun run typecheck && bun run lint && bun run test:unit && bun run build"
   },
   "keywords": [
     "genuivo",
